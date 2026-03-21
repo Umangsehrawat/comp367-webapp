@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'MAVEN3'
+        maven 'Maven3'
     }
 
     environment {
@@ -19,13 +19,17 @@ pipeline {
 
         stage('Build maven project') {
             steps {
-                bat 'mvn clean install'
+                dir('comp367-webapp') {
+                    bat 'mvn clean install'
+                }
             }
         }
 
         stage('Unit test') {
             steps {
-                bat 'mvn test'
+                dir('comp367-webapp') {
+                    bat 'mvn test'
+                }
             }
         }
 
@@ -37,7 +41,9 @@ pipeline {
 
         stage('Docker build') {
             steps {
-                bat 'docker build -t umangsehrawat/comp367-webapp:1.0 .'
+                dir('comp367-webapp') {
+                    bat 'docker build -t umangsehrawat/comp367-webapp:1.0 .'
+                }
             }
         }
 
