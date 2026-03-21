@@ -13,23 +13,19 @@ pipeline {
 
         stage('Check out') {
             steps {
-                git branch: 'main', url: 'https://github.com/Umangsehrawat/comp367-webapp-q3'
+                git branch: 'main', url: 'https://github.com/Umangsehrawat/comp367-webapp.git'
             }
         }
 
         stage('Build maven project') {
             steps {
-                dir('comp367-webapp') {
-                    bat 'mvn clean install'
-                }
+                bat 'mvn clean install'
             }
         }
 
         stage('Unit test') {
             steps {
-                dir('comp367-webapp') {
-                    bat 'mvn test'
-                }
+                bat 'mvn test'
             }
         }
 
@@ -41,9 +37,7 @@ pipeline {
 
         stage('Docker build') {
             steps {
-                dir('comp367-webapp') {
-                    bat 'docker build -t umangsehrawat/comp367-webapp:1.0 .'
-                }
+                bat 'docker build -t umangsehrawat/comp367-webapp:1.0 .'
             }
         }
 
