@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_PWD = credentials('CredentialID_DockerHubPWD')
+        DOCKER_CREDS = credentials('dockerhubpwd')
     }
 
     stages {
@@ -31,7 +31,7 @@ pipeline {
 
         stage('Docker login') {
             steps {
-                bat 'docker login -u umangsehrawat -p %DOCKERHUB_PWD%'
+                bat 'docker login -u %DOCKER_CREDS_USR% -p %DOCKER_CREDS_PSW%'
             }
         }
 
